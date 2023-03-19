@@ -6,6 +6,7 @@ use App\Enum\MemoryEnum;
 use App\Exceptions\SaveDataException;
 use App\Exceptions\ValidationException;
 use App\Factories\Feedback\FeedbackFactory;
+use App\Rules\MobileNumberRule;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -28,12 +29,12 @@ class FeedbackService
         ];
 
         $validator = Validator::make($data, [
-            'name' => 'required|max:255',
-            'phone' => 'required|max:12',
+            'name' => ['required', 'max:255'],
+            'phone' => ['required', new MobileNumberRule()],
             'message' => 'required',
         ]);
         if ($validator->fails()) {
-            throw new ValidationException('Ошибка валидации данных');
+            throw new ValidationException(implode(' ', $validator->errors()->all()));
         }
 
         // create a factory

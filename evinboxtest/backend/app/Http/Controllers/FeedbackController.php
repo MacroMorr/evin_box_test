@@ -20,9 +20,12 @@ class FeedbackController extends BaseController
         try {
             $feedbackService->save($request, MemoryEnum::FILE);
         } catch (ValidationException|SaveDataException $e) {
-            return $response->setStatusCode(Response::HTTP_BAD_REQUEST)->setData(['message' => $e->getMessage()]);
+            return $response->setStatusCode(Response::HTTP_BAD_REQUEST)->setData([
+                'error' => true,
+                'message' => $e->getMessage(),
+            ]);
         }
 
-        return $response->setData(['message' => 'OK']);
+        return $response->setData(['message' => 'Данные успешно отправлены']);
     }
 }
