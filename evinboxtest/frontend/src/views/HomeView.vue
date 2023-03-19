@@ -1,8 +1,9 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'</script>
+import FeedbackForm from "@/components/FeedbackForm.vue";
+</script>
 
 <template>
   <main>
-    <TheWelcome />
+    <FeedbackForm />
   </main>
 </template>
