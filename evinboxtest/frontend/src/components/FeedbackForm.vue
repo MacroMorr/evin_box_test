@@ -28,12 +28,13 @@ export default {
   }),
 
   methods: {
-    sendForm() {
-      axios.post(import.meta.env.VITE_BACKEND_URL, {
+    async sendForm() {
+      const response = await axios.post(import.meta.env.VITE_BACKEND_URL, {
         name: this.name,
         phone: this.phone,
         message: this.message,
       })
+
     }
   }
 }
